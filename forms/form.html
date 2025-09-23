@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from speedway-cyber-services.netlify.app/forms/form by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 23 Sep 2025 11:10:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!---jsPDF for PDF-->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!---docx for word-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.0.4/docx.umd.min.js"></script>
+    <!--css file-->
+  <link rel="stylesheet" href="forms.css">
+    <title>Services Offered</title>
+</head>
+<body>
+    <h3>WE OFFER THE FOLLOWING SERVICES</h3>
+<div class="main">
+  <h2>PHOTOCOPY & PRINTING</h2>
+ <!---search box-->
+<input type="search" id="searchBox" placeholder="Search services...">
+
+<!--Dropdown-->
+<select  id="serviceList" size="3">
+<option value="application">PROF. APPLICATION</option>
+<option value="cv">PROF. C.V</option>
+<option value="passport">INSTANT PASSPORT</option>
+<option value="scanning">SCANNING</option>
+<option value="lamination">LAMINATION</option>
+<option value="poster">POSTER DESIGNING</option>
+<option value="businesscards">BUSINESS CARDS</option>
+<option value="weddingcards">WEDDING CARDS</option>
+<option value="windows">WINDOWS INSTALLATION</option>
+<option value="browsing">BROWSING</option>
+<option value="kra">KRA ITAX</option>
+</select>
+<!---Where forms will appear-->
+<div class="formContainer" id="formContainer">
+<textarea  id="textArea"></textarea>
+<button type="button">Download</button>
+
+</div>
+
+   <!---script file-->
+   <script>
+const { jsPDF } = window.jspdf;
+const { Document, Packer, Paragraph, TextRun } = window.docx;
+
+const searchBox = document.getElementById("searchBox");
+const serviceList = document.getElementById("serviceList");
+const formContainer = document.getElementById("formContainer");
+
+// 🔍 Search filter
+searchBox.addEventListener("keyup", () => {
+let filter = searchBox.value.toLowerCase();
+let options = serviceList.options;
+
+for (let i=0; i< options.length; i++) {
+  let text = options[i].text.toLowerCase();
+  options[i].style.display = text.includes(filter) ? "" : "none"
+}
+});
+
+// Forms for service
+const forms = {
+  application: `
+  <h4>Application Letter Form</h4>
+  <label>Full Name:</label><br>
+  <input type="text" id="appName"><br>
+  <label>Position Applied For:</label><br>
+  <input type="text" id="appPosition"><br>
+  <button onclick="generateApplication('pdf')">Download PDF</button>
+  <button onclick="generateApplication('docx')">Download Word</button> `
+  , 
+  cv: `
+  <h4>Curriculum Vitae Form</h4>
+  <label>Full Name:</label><br>
+  <input type="text" id="cvName"><br>
+  <label>Email:</label><br>
+  <input type="email" id="cvEmail"><br>
+  <label>Experience:</label><br>
+  <textarea id="cvExperience"></textarea><br>
+  <button onclick="generateCV('pdf')">Download PDF</button>
+  <button onclick="generateCV('docx')">Download Word</button>
+  `
+  ,
+  kra: `
+  <h4>KRA iTax Access</h4>
+  <p>Click below to open the official KRA iTax system</p>
+  <button onclick="window.open('https://itax.kra.go.ke/', '_blank')">Go to iTax</button>
+  `
+  ,
+  browsing: `
+  <h4>Browsing Service</h4>
+  <p>Redirect to Google search</p>
+  <button onclick="window.open('https://www.google.com/', '_blank')">Start Browsing</button>
+  `
+  ,
+  windows: `
+  <h4>Windows Installation</h4>
+  <p>Download Windows installation guide.</p>
+  <button onclick="window.open('https://www.microsoft.com/software-download/windows10', '_blank')">Go to Microsoft</button>
+  `
+};
+
+  // 📌 Show form based on selection
+  serviceList.addEventListener("change", () => {
+let selected = serviceList.value;
+if (forms[selected]) {
+  formContainer.innerHTML = forms[selected];
+
+  formContainer.style.display = "block";
+} else {
+  formContainer.innerHTML = "<p>Form not available for this service yet.</p>";
+}
+  });
+
+  // 📄 PDF & WORD  generation
+function generateApplication(format) {
+  let name = document.getElementById("appName").value || "Applicant";
+  let position = document.getElementById("appPosition").value || "Job Title";
+
+if (format === "pdf") {
+  const doc = new jsPDF();
+  doc.text("Application Letter", 10, 10);
+  doc.text(`Dear Sir/Madam,`, 10, 20);
+  doc.text(`I, ${name}, wish to apply for the position of ${position}.`, 10, 30);
+  doc.text("Kind regards,", 1, 40);
+  doc.text(name, 10, 50);
+  doc.save("Application_Letter.html");
+} else {
+  const doc = new Document({
+    sections: [{
+      children: [
+      new Paragraph({
+      children: [new TextRun({text: "Application Letter", bold: true})]
+      }),
+      new Paragraph("Dear Sir/Madam,")
+      ,
+      new Paragraph(`I, ${name}, wish to apply for the position of ${position}.`),
+      new Paragraph("Kind regards,"),
+      new Paragraph(name)
+      ]
+    }]
+  });
+  Packer.toBlob(doc).then(blob => saveAs(blob, "Application_Letter-2.html"));
+}
+};
+
+function generateCV(format) {
+  let name = document.getElementById("cvName").value || "Your Name";
+  let email = document.getElementById("cvEmail").value || "email@example.com";
+  let exp = document.getElementById("cvExperience").value || "Experience details here.";
+
+  if (format === "pdf") {
+    const doc = new jsPDF();
+    doc.text("Curriculum Vitae", 10, 10);
+    doc.text(`Name: ${name}`, 10, 20);
+    doc.text(`Email: ${email}`, 10, 30);
+    doc.text("Work Experience:", 10, 40);
+    doc.text(exp, 10, 50);
+    doc.save("CV.html");
+  } else {
+    const doc = new Document({
+      sections: [{
+      children: [
+        new Paragraph({ children: [new TextRun({ text: "Curriculum Vitae", bold: true, size: 28})]}),
+
+      new Paragraph(`Name: ${name}`),
+      new Paragraph(`Email: ${email}`)
+      ,
+      new Paragraph("Work Experience:"),
+      new Paragraph(exp)
+      ]
+      }]
+    });
+    Packer.toBlob(doc).then(blob => saveAs(blob, "CV-2.html"));
+  }
+}
+
+  // Helper for saving Word
+  function saveAs(blob, filename) {
+    const link = document.createElement("a");
+
+    const url = URL.createObjectURL(blob);
+link.href = url;
+link.download = filename;
+document.body.appendChild(link);
+link.click();
+document.body.removeChild(link);
+URL.revokeObjectURL(url);
+
+
+  }
+   </script>
+</body>
+
+<!-- Mirrored from speedway-cyber-services.netlify.app/forms/form by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 23 Sep 2025 11:10:17 GMT -->
+</html>

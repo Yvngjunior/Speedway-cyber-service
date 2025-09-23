@@ -1,0 +1,142 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+/* Contact Section */
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 70px 20px;
+  background: linear-gradient(135deg, #f4f6f9, #e9ecef);
+}
+
+.contact-container {
+  width: 100%;
+  max-width: 550px;
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.contact-container:hover {
+  transform: translateY(-5px);
+}
+
+.contact-container h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 2rem;
+  color: #222;
+}
+
+.contact-subtitle {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.contact-form .input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.contact-form label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-form label i {
+  font-size: 1rem;
+  color: #007bff;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 14px 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #fafafa;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #007bff;
+  background: #fff;
+  outline: none;
+  box-shadow: 0px 0px 8px rgba(0,123,255,0.3);
+}
+
+.contact-form textarea {
+  resize: none;
+  min-height: 130px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: #007bff;
+  color: #fff;
+  font-size: 1.05rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.submit-btn i {
+  font-size: 1rem;
+}
+
+.submit-btn:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+/* Footer */
+.footer {
+  background: #111;
+  color: #bbb;
+  text-align: center;
+  padding: 25px 20px;
+  margin-top: 40px;
+  border-top: 2px solid #222;
+}
+
+.footer p {
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+.footer .social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.footer .social-icons a {
+  color: #bbb;
+  font-size: 1.4rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.footer .social-icons a:hover {
+  color: #007bff;
+  transform: translateY(-3px);
+}

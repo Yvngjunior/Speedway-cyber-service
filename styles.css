@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&amp;family=Oswald:wght@200..700&amp;display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Oswald", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: url("speedway.jpg") no-repeat center/cover;
+  color: #fff;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  text-shadow: 0 3px 2px rgb(196, 20, 122);
+}
+
+h2 {
+  color: red;
+  animation: bord 1s infinite;
+  border-radius: 5px;
+  font-size: 28px;
+}
+
+@keyframes bord {
+  0% { text-shadow: 0 3px 2px #fff; }
+  25% { text-shadow: 0 3px 2px rgb(90, 15, 209); }
+  50% { text-shadow: 0 3px 2px rgb(207, 78, 26); }
+  75% { text-shadow: 0 3px 2px rgb(226, 235, 229); }
+  100% { text-shadow: 0 3px 2px rgb(12, 185, 21); }
+}
+
+.image img {
+  width: 80px;
+  border-radius: 50%;
+  transition: all .5s ease;
+}
+
+.image img:hover {
+  transform: rotateX(720deg);
+  width: 100px;
+  cursor: pointer;
+}
+
+/* Navigation */
+nav {
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 10px;
+}
+
+nav a {
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0 3px 2px black;
+  font-size: 20px;
+}
+
+nav a.active {
+  color: rgb(30, 206, 68);
+  font-size: 21px;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  border-radius: 5px;
+  background: #fff;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .5s;
+}
+
+nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Hamburger menu (mobile) */
+.menu-btn {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+/* Search + Aside */
+section {
+  padding: 20px;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+section input {
+  width: 100%;
+  padding: 8px 35px;
+  background: #333;
+  color: #fff;
+  font-weight: 500;
+  font-family: monospace;
+  font-size: 18px;
+  border-radius: 5px;
+  outline: none;
+}
+
+section input:focus {
+  border-color: springgreen;
+}
+
+section .search {
+  position: absolute;
+  color: #fff;
+  font-size: 20px;
+  margin: 12px;
+}
+
+aside {
+  background: linear-gradient(to left, powderblue, #555);
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+aside div {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+aside div img {
+  width: 100px;
+  border-radius: 20%;
+  cursor: pointer;
+}
+
+aside div a {
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+aside div a:hover {
+  text-decoration: underline;
+  color: blue;
+}
+
+/* Banner */
+.banner {
+  max-width: 600px;
+  padding: 15px;
+  background: linear-gradient(to left, powderblue, #555);
+  margin: 20px auto;
+  border-radius: 7px;
+  box-shadow: 0 3px 2px #fff;
+  text-align: center;
+}
+
+.banner p {
+  font-size: 20px;
+  font-weight: 700;
+  color: chartreuse;
+  text-shadow: 0 3px 2px black;
+}
+
+strong {
+  color: seagreen;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  color: coral;
+  font-weight: 700;
+  text-shadow: 0 3px 2px paleturquoise;
+}
+
+select {
+  background: #f3f0f0;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+option {
+  background: rgb(140, 189, 214);
+  font-weight: 700;
+}
+
+/* ========== Media Queries ========== */
+
+/* Phones (<=600px) */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  nav {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  nav.show {
+    display: flex;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  aside div img {
+    width: 70px;
+  }
+
+  .banner {
+    width: 90%;
+  }
+}
+
+/* Tablets (601px – 1024px) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  nav {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  nav a {
+    font-size: 18px;
+  }
+
+  .banner {
+    width: 90%;
+  }
+
+  aside div img {
+    width: 90px;
+  }
+}
+
+/* Desktops (>=1025px) */
+@media (min-width: 1025px) {
+  nav a {
+    font-size: 20px;
+  }
+
+  .banner {
+    width: 600px;
+  }
+}

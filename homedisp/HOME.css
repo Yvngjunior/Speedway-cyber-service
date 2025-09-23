@@ -1,0 +1,15 @@
+*{
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+font-family: monospace;
+}
+
+body{
+    height: 100vh;
+     background: linear-gradient(to left,rgb(49, 71, 141),#555); 
+}
+h2{
+    text-align: center;
+    color: aqua;
+}
